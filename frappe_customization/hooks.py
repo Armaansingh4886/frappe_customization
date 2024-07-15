@@ -122,13 +122,19 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	# "*": {
+	# 	"on_update": "method",
+	# 	"on_cancel": "method",
+	# 	"on_trash": "method"
+	# }
+    "Purchase Order": {
+        "on_submit": "frappe_customization.customization.purchase_order_email.send_mail"
+    },
+     "Customer": {
+        "validate": "frappe_customization.customization.purchase_order_email.validate_customer_anniversary"
+    }
+}
 
 # Scheduled Tasks
 # ---------------
@@ -227,3 +233,13 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+fixtures = [
+    {
+      "doctype": "Custom Field",
+        "filters": {
+                "name":( "in", (
+                    "Customer-custom_customer_anniversary"
+                ))
+        }
+    }
+]
