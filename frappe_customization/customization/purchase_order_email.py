@@ -12,3 +12,15 @@ def validate_customer_anniversary(doc, method):
 
         if anniversary_date > today:
             frappe.throw(("Customer Anniversary date cannot be a future date."))
+
+def test_debugger(a=9,b=8):
+    import ipdb;ipdb.set_trace()
+    print(a+b)
+
+def customError():
+    try:
+        a=1/0
+        print(a)
+    except Exception as e:
+        frappe.log_error("Can't divide by 0")
+
